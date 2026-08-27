@@ -9,7 +9,7 @@
            value="$(var uav_sim_prefix)/lib:$(var ardu_gazebo_prefix)/lib/ardupilot_gazebo"/>
 
   <group if="$(eval '\'$(var use_swarm)\' == \'false\' ')">
-    <executable cmd="gz sim -v4 -r $(var uav_sim_share)/worlds/arena_d2.sdf"
+    <executable cmd="gz sim -v4 -r $(var uav_sim_share)/worlds/iris_runway.sdf"
                 output="screen"/>
   </group>
   <group if="$(eval '\'$(var use_swarm)\' == \'true\' ')">
