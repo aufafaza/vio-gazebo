@@ -1,0 +1,78 @@
+#was taken from real t265 cam
+static_transforms:
+  - parent_frame: camera_pose_frame
+    child_frame: camera_link
+    translation: { x: 0.0, y: 0.0, z: 0.0 }
+    rotation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 }
+
+  - parent_frame: camera_link
+    child_frame: camera_fisheye1_frame
+    translation:
+      x: 9.781432891031727e-05
+      y: 0.03198377043008804
+      z: 0.0001564743579365313
+    rotation:
+      x: 0.003052633721381648
+      y: -0.9999939799308777
+      z: 0.0016557397320866585
+      w: -4.004898073617369e-05
+
+  - parent_frame: camera_link
+    child_frame: camera_aligned_depth_to_fisheye1_frame
+    translation:
+      x: 9.781432891031727e-05
+      y: 0.03198377043008804
+      z: 0.0001564743579365313
+    rotation:
+      x: 0.003052633721381648
+      y: -0.9999939799308777
+      z: 0.0016557397320866585
+      w: -4.004898073617369e-05
+
+  - parent_frame: camera_aligned_depth_to_fisheye1_frame
+    child_frame: camera_fisheye1_optical_frame
+    translation: { x: 0.0, y: 0.0, z: 0.0 }
+    rotation: { x: 0.5, y: -0.5, z: -0.5, w: 0.5 }
+
+  - parent_frame: camera_link
+    child_frame: camera_fisheye2_frame
+    translation:
+      x: -9.781432891031727e-05
+      y: -0.03198377043008804
+      z: -0.0001564743579365313
+    rotation:
+      x: 0.0010855384171011284
+      y: -0.9999963045120239
+      z: 0.0019317161059007049
+      w: -0.0015716508496552706
+
+  - parent_frame: camera_fisheye2_frame
+    child_frame: camera_fisheye2_optical_frame
+    translation: { x: 0.0, y: 0.0, z: 0.0 }
+    rotation: { x: 0.5, y: -0.5, z: -0.5, w: 0.5 }
+
+  - parent_frame: camera_link
+    child_frame: camera_gyro_frame
+    translation:
+      x: 3.248977736802772e-05
+      y: 0.021284028887748718
+      z: 0.00012103913468308747
+    rotation: { x: 0.0, y: 0.0, z: 1.0, w: 0.0 }
+
+  - parent_frame: camera_gyro_frame
+    child_frame: camera_gyro_optical_frame
+    translation: { x: 0.0, y: 0.0, z: 0.0 }
+    rotation: { x: 0.5, y: -0.5, z: -0.5, w: 0.5 }
+
+  - parent_frame: camera_link
+    child_frame: camera_accel_frame
+    translation:
+      x: 3.248977736802772e-05
+      y: 0.021284028887748718
+      z: 0.00012103913468308747
+    rotation: { x: 0.0, y: 0.0, z: 1.0, w: 0.0 }
+
+  - parent_frame: camera_accel_frame
+    child_frame: camera_accel_optical_frame
+    translation: { x: 0.0, y: 0.0, z: 0.0 }
+    rotation: { x: 0.5, y: -0.5, z: -0.5, w: 0.5 }

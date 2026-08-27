@@ -1,0 +1,125 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <model name="realsense_t265">
+    <link name="link">
+      <inertial>
+        <mass>0.055</mass>
+        <inertia>
+          <ixx>9.108e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.51e-06</iyy>
+          <iyz>0</iyz>
+          <izz>8.931e-05</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="visual">
+        <pose>0 0 0 1.57 0 1.57</pose>
+        <geometry>
+          <mesh>
+            <uri>model://t265/meshes/realsense_t265.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.013 0.108 0.024</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <sensor name="fisheye1" type="wideanglecamera">
+        <pose>0.01 0.042 0 0 0 0</pose>
+        <update_rate>5</update_rate>
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <topic>fisheye1/image_raw</topic>
+        <camera>
+          <horizontal_fov>2.844</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>848</height>
+            <format>L8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>20</far>
+          </clip>
+          <lens>
+            <type>custom</type>
+            <custom_function>
+              <c1>1.05</c1>
+              <c2>4</c2>
+              <f>1.0</f>
+              <fun>tan</fun>
+            </custom_function>
+            <scale_to_hfov>true</scale_to_hfov>
+            <cutoff_angle>3.1415</cutoff_angle>
+          </lens>
+        </camera>
+      </sensor>
+
+      <sensor name="fisheye2" type="wideanglecamera">
+        <pose>0.01 -0.022 0 0 0 0</pose>
+        <update_rate>0</update_rate>
+        <always_on>false</always_on>
+        <visualize>false</visualize>
+        <topic>fisheye2/image_raw</topic>
+        <camera>
+          <horizontal_fov>2.844</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>848</height>
+            <format>L8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>20</far>
+          </clip>
+          <lens>
+            <type>custom</type>
+            <custom_function>
+              <c1>1.05</c1>
+              <c2>4</c2>
+              <f>1.0</f>
+              <fun>tan</fun>
+            </custom_function>
+            <scale_to_hfov>true</scale_to_hfov>
+            <cutoff_angle>3.1415</cutoff_angle>
+          </lens>
+        </camera>
+      </sensor>
+
+      <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>62</update_rate>
+        <visualize>true</visualize>
+        <topic>imu</topic>
+        <imu>
+          <angular_velocity>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.0001</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.0001</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.0001</stddev></noise></z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.017</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.017</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.017</stddev></noise></z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+    </link>
+
+    <plugin
+      filename="gz-sim-odometry-publisher-system"
+      name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>world</odom_frame>
+      <robot_base_frame>link</robot_base_frame>
+      <odom_topic>odom/sample</odom_topic>
+    </plugin>
+  </model>
+</sdf>

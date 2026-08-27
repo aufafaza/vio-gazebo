@@ -1,0 +1,231 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="arena_d2">
+    <physics name="1ms" type="ignore">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
+    <plugin filename="gz-sim-navsat-system"
+      name="gz::sim::systems::NavSat">
+    </plugin>
+
+    <scene>
+      <ambient>1.0 1.0 1.0</ambient>
+      <background>0.8 0.8 0.8</background>
+      <sky></sky>
+    </scene>
+
+    <spherical_coordinates>
+      <latitude_deg>-35.363262</latitude_deg>
+      <longitude_deg>149.165237</longitude_deg>
+      <elevation>584</elevation>
+      <heading_deg>0</heading_deg>
+      <surface_model>EARTH_WGS84</surface_model>
+    </spherical_coordinates>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.8 0.8 0.8 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="axes">
+      <static>1</static>
+      <link name="link">
+        <visual name="r">
+          <cast_shadows>0</cast_shadows>
+          <pose>5 0 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>10 0.01 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 0.8</ambient>
+            <diffuse>1 0 0 0.8</diffuse>
+            <emissive>1 0 0 0.8</emissive>
+            <specular>0.5 0.5 0.5 0.8</specular>
+          </material>
+        </visual>
+        <visual name="g">
+          <cast_shadows>0</cast_shadows>
+          <pose>0 5 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 10 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 1 0 0.8</ambient>
+            <diffuse>0 1 0 0.8</diffuse>
+            <emissive>0 1 0 0.8</emissive>
+            <specular>0.5 0.5 0.5 0.8</specular>
+          </material>
+        </visual>
+        <visual name="b">
+          <cast_shadows>0</cast_shadows>
+          <pose>0 0 5.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.01 10</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 1 0.8</ambient>
+            <diffuse>0 0 1 0.8</diffuse>
+            <emissive>0 0 1 0.8</emissive>
+            <specular>0.5 0.5 0.5 0.8</specular>
+          </material>
+        </visual>
+        <sensor name="navsat_sensor" type="navsat">
+          <always_on>1</always_on>
+          <update_rate>1</update_rate>
+        </sensor>
+      </link>
+    </model>
+    
+    <include>
+      <uri>model://runway</uri>
+      <pose degrees="true">-29 545 0 0 0 363</pose>
+    </include>
+
+    <include>
+      <uri>model://iris_with_t265</uri>
+      <pose degrees="true">5 11.5 0.205 0 0 90</pose>
+    </include>
+    <include>
+      <uri>model://arena_d2</uri>
+      <pose degrees="true">0 0 0.01 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://gate_d2</uri>
+      <pose degrees="true">0 0 0.01 0 0 0</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00000</name>
+      <uri>model://Apriltag36_11_00000</uri>
+      <pose>4.1596000000000002 13.949999999999999 0.61070000000000002 3.1321926535749083 1.5707926536359933 -1.5801926536095972</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00001</name>
+      <uri>model://Apriltag36_11_00001</uri>
+      <pose>5.8456254005432129 13.950200080871582 0.61243200302124023 -1.567442480108711 1.5700000026765395 0.0044305451421165071</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00002</name>
+      <uri>model://Apriltag36_11_00002</uri>
+      <pose>5.8388800621032715 13.948699951171875 2.2999057769775391 -1.6636114067854597 1.5707899806494316 -0.095307389243055721</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00003</name>
+      <uri>model://Apriltag36_11_00003</uri>
+      <pose>4.1497697830200195 13.949700355529785 2.3052799701690674 1.5714350183503445 -1.5650371883278238 -0.0032113585417588948</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00004</name>
+      <uri>model://Apriltag36_11_00004</uri>
+      <pose>5.0998000000000001 25.974599999999999 0.59970000000000001 -1.3479926536321718 1.5707926536662187 0.22369265355028395</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00005</name>
+      <uri>model://Apriltag36_11_00005</uri>
+      <pose>6.7988104820251465 25.968803405761719 0.59969997406005859 1.5666846825855703 1.5707899788477593 3.1363146954320733</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00006</name>
+      <uri>model://Apriltag36_11_00006</uri>
+      <pose>6.7919 25.974599999999999 2.2848999999999999 -0.0046926535424292237 1.5707926536662187 1.5660926536164108</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00007</name>
+      <uri>model://Apriltag36_11_00007</uri>
+      <pose>5.0998000000000001 25.974599999999999 2.2848999999999999 1.5563926535503383 1.5707926536057681 3.1372926535602579</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00008</name>
+      <uri>model://Apriltag36_11_00008</uri>
+      <pose>14.906499862670898 23.524900436401367 0.60259497165679932 1.5703879343553735 -1.5670037703745929 3.1415771668400496</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00009</name>
+      <uri>model://Apriltag36_11_00009</uri>
+      <pose>13.196811676025391 23.527000427246094 0.59483861923217773 1.5026506517299267 -1.5674000395393282 -3.0745006710333973</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00010</name>
+      <uri>model://Apriltag36_11_00010</uri>
+      <pose>13.204899787902832 23.537399291992188 2.2919685840606689 -1.5968275358156703 1.5707900076131727 3.1298924905794001</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00011</name>
+      <uri>model://Apriltag36_11_00011</uri>
+      <pose>14.897631645202637 23.526556015014648 2.2895300388336182 -1.5725068319312181 1.5707900087376947 -3.1398821484798298</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00012</name>
+      <uri>model://Apriltag36_11_00012</uri>
+      <pose>14.445623397827148 7.2436189651489258 0.5952906608581543 1.571727204012153 -1.5677899854750375 2.7062028093667911</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00013</name>
+      <uri>model://Apriltag36_11_00013</uri>
+      <pose>12.905699729919434 7.9607200622558594 0.59353399276733398 -1.5341223009331209 1.5603348283077574 2.7390240014687253</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00014</name>
+      <uri>model://Apriltag36_11_00014</uri>
+      <pose>12.908936500549316 7.9596796035766602 2.2922878265380859 1.5658251618600445 -1.5702999863103679 2.7157348576728304</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00015</name>
+      <uri>model://Apriltag36_11_00015</uri>
+      <pose>14.444234848022461 7.2420926094055176 2.2895033359527588 -1.171829821375582 -1.5596600265072618 -0.83966215221164653</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00016</name>
+      <uri>model://Apriltag36_11_00016</uri>
+      <pose>4.1499300003051758 8.9965200424194336 0.60573798418045044 -1.6149481923768234 -1.5614299944339445 -3.1030178245176177</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00017</name>
+      <uri>model://Apriltag36_11_00017</uri>
+      <pose>5.8503484725952148 8.9993791580200195 0.60571837425231934 -1.5710005595651333 -1.5633000073245198 -3.1302993785419186</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00018</name>
+      <uri>model://Apriltag36_11_00018</uri>
+      <pose>5.8489599227905273 8.9973773956298828 2.2995500564575195 1.5367687843038886 1.5707900075956036 3.1378888239944587</pose>
+    </include>
+    <include>
+      <name>Apriltag36_11_00019</name>
+      <uri>model://Apriltag36_11_00019</uri>
+      <pose>4.1539602279663086 8.9991598129272461 2.302570104598999 1.5708055577514894 -1.566909980178002 0.0020950557885067813</pose>
+    </include>  
+  </world>
+</sdf>

@@ -1,0 +1,40 @@
+<launch>
+    <arg name="mode" default="d2" description="mode for mission" />
+    <arg name="use_swarm" default="false" description="set to true to use swarm drone" />
+    <group if="$(eval '\'$(var mode)\' == \'d1\' ')">
+        <include file="$(find-pkg-share uav_sim)/launch/gz_ardu_d1.launch.xml" />
+    </group>
+    <group if="$(eval '\'$(var mode)\' == \'d2\' ')">
+        <include file="$(find-pkg-share uav_sim)/launch/gz_ardu_d2.launch.xml" />
+    </group>
+    <group if="$(eval '\'$(var use_swarm)\' == \'false\' ')">
+        <include file="$(find-pkg-share uav_sim)/launch/sitl.launch.xml">
+            <arg name="instance" value="0" />
+            <arg name="sysid" value="1" />
+            <arg name="param_file" value="$(find-pkg-share uav_sim)/params/gz_uav_1.parm" />
+        </include>
+    </group>
+    <group if="$(eval '\'$(var use_swarm)\' == \'true\' ')">
+        <group>
+            <include file="$(find-pkg-share uav_sim)/launch/sitl.launch.xml">
+                <arg name="instance" value="0"/>
+                <arg name="sysid" value="1"/>
+                <arg name="param_file" value="$(find-pkg-share uav_sim)/params/gz_uav_1.parm" />
+            </include>
+        </group>
+        <group>
+            <include file="$(find-pkg-share uav_sim)/launch/sitl.launch.xml">
+                <arg name="instance" value="1"/>
+                <arg name="sysid" value="2"/>
+                <arg name="param_file" value="$(find-pkg-share uav_sim)/params/gz_uav_2.parm" />
+            </include>
+        </group>
+        <group>
+            <include file="$(find-pkg-share uav_sim)/launch/sitl.launch.xml">
+                <arg name="instance" value="2"/>
+                <arg name="sysid" value="3"/>
+                <arg name="param_file" value="$(find-pkg-share uav_sim)/params/gz_uav_3.parm" />
+            </include>
+        </group>
+    </group>
+</launch>

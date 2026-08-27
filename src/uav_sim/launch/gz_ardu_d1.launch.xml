@@ -1,0 +1,13 @@
+<launch>
+  <let name="uav_sim_share" value="$(find-pkg-share uav_sim)"/>
+  <let name="uav_sim_prefix" value="$(find-pkg-prefix uav_sim)"/>
+  <let name="ardu_gazebo_prefix" value="$(find-pkg-prefix ardupilot_gazebo)"/>
+
+  <set_env name="GZ_SIM_RESOURCE_PATH" value="$(var uav_sim_share)/models"/>
+  
+  <set_env name="GZ_SIM_SYSTEM_PLUGIN_PATH" 
+           value="$(var uav_sim_prefix)/lib:$(var ardu_gazebo_prefix)/lib/ardupilot_gazebo"/>
+
+  <executable cmd="gz sim -v4 -r $(var uav_sim_share)/worlds/arena_d1.sdf" 
+              output="screen"/>
+</launch>

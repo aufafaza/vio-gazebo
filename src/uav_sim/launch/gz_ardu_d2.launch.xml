@@ -1,0 +1,28 @@
+<launch>
+  <let name="uav_sim_share" value="$(find-pkg-share uav_sim)"/>
+  <let name="uav_sim_prefix" value="$(find-pkg-prefix uav_sim)"/>
+  <let name="ardu_gazebo_prefix" value="$(find-pkg-prefix ardupilot_gazebo)"/>
+  <arg name="use_swarm" default="false" description="set to true for d2 swarming drone world"/>
+
+  <set_env name="GZ_SIM_RESOURCE_PATH" value="$(var uav_sim_share)/models"/>
+  <set_env name="GZ_SIM_SYSTEM_PLUGIN_PATH"
+           value="$(var uav_sim_prefix)/lib:$(var ardu_gazebo_prefix)/lib/ardupilot_gazebo"/>
+
+  <group if="$(eval '\'$(var use_swarm)\' == \'false\' ')">
+    <executable cmd="gz sim -v4 -r $(var uav_sim_share)/worlds/arena_d2.sdf"
+                output="screen"/>
+  </group>
+  <group if="$(eval '\'$(var use_swarm)\' == \'true\' ')">
+    <executable cmd="gz sim -v4 -r $(var uav_sim_share)/worlds/arena_d2_swarm.sdf"
+                output="screen"/>
+  </group>
+
+  <node pkg="ros_gz_bridge" exec="parameter_bridge" name="gz_bridge" output="screen">
+    <param name="config_file" value="$(var uav_sim_share)/config/t265_bridge.yaml"/>
+  </node>
+
+  <node pkg="uav_sim" exec="static_tf_broadcaster" name="t265_tf" output="screen">
+    <param name="config_file" value="$(var uav_sim_share)/config/t265_tf.yaml"/>
+  </node>
+
+</launch>
