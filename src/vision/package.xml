@@ -13,6 +13,9 @@
   <build_depend>rclcpp</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>nav_msgs</build_depend>
+  <build_depend>mavros_msgs</build_depend>
+  <build_depend>libmavconn</build_depend>
+  <build_depend>mavlink</build_depend>
   <build_depend>vision_opencv</build_depend>
   <build_depend>tf2_ros</build_depend>
   <build_depend>tf2_geometry_msgs</build_depend>
